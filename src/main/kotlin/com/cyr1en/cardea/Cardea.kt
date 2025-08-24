@@ -1,11 +1,5 @@
 package com.cyr1en.cardea
 
-import com.cyr1en.cardea.listener.CardeaListener
-import com.mojang.brigadier.Command
-import com.mojang.brigadier.arguments.StringArgumentType
-import io.papermc.paper.command.brigadier.Commands
-import io.papermc.paper.command.brigadier.argument.ArgumentTypes
-import io.papermc.paper.command.brigadier.argument.resolvers.selector.PlayerSelectorArgumentResolver
 import io.papermc.paper.plugin.bootstrap.BootstrapContext
 import io.papermc.paper.plugin.bootstrap.PluginBootstrap
 import io.papermc.paper.plugin.bootstrap.PluginProviderContext
@@ -17,7 +11,6 @@ import io.papermc.paper.registry.data.dialog.body.DialogBody
 import io.papermc.paper.registry.data.dialog.input.DialogInput
 import io.papermc.paper.registry.data.dialog.type.DialogType
 import io.papermc.paper.registry.event.RegistryEvents
-import io.papermc.paper.registry.keys.DialogKeys
 import net.kyori.adventure.key.Key
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.TextColor
@@ -25,10 +18,12 @@ import org.bukkit.Bukkit
 import org.bukkit.command.ConsoleCommandSender
 import org.bukkit.plugin.java.JavaPlugin
 
-class Cardea : JavaPlugin() {
+class Cardea() : JavaPlugin() {
 
     private val _dataStore = DataStore()
     val dataStore get() = _dataStore
+
+    var jsonConfig: Config = deserialize()
 
     override fun onEnable() {
         logger.info("Cardea Password ${_dataStore.getPassword()}.")
@@ -43,7 +38,6 @@ class Cardea : JavaPlugin() {
         @JvmStatic
         fun instance() = getPlugin(Cardea::class.java)
     }
-
 }
 
 
@@ -54,7 +48,7 @@ class CardeaBootstrapper : PluginBootstrap {
         context.lifecycleManager.registerEventHandler(
             RegistryEvents.DIALOG.compose()
                 .newHandler { e ->
-                    e.registry().register(DialogKeys.create(Key.key("cardea:login"))) { b ->
+                    e.registry().register(dialogKey("cardea:login")) { b ->
                         b.base(
                             DialogBase.builder(Component.text("Camp HAM HOA Login", TextColor.color(0xf38ba8)))
                                 .canCloseWithEscape(false)
@@ -86,48 +80,7 @@ class CardeaBootstrapper : PluginBootstrap {
         )
 
         context.lifecycleManager.registerEventHandler(LifecycleEvents.COMMANDS) { commands ->
-            val command = Commands.literal("cardea")
-                .then(
-                    Commands.literal("pwd")
-                        .requires { sender -> sender.sender is ConsoleCommandSender }
-                        .then(
-                            Commands.argument("pwd", StringArgumentType.word())
-                                .executes { ctx ->
-                                    val pwd = StringArgumentType.getString(ctx, "pwd")
-                                    if (pwd.isEmpty()) {
-                                        ctx.source.sender.sendMessage(Component.text("Password cannot be empty!"))
-                                        return@executes Command.SINGLE_SUCCESS
-                                    }
-                                    val instance = Cardea.instance()
-                                    instance.logger.info("Setting password to $pwd.")
-                                    Cardea.instance().dataStore.setPassword(pwd)
-                                    ctx.source.sender.sendMessage(Component.text("Password set successfully!"))
-                                    return@executes Command.SINGLE_SUCCESS
-                                }
-                        ))
-                .then(
-                    Commands.literal("showpwd")
-                        .requires { sender -> sender.sender is ConsoleCommandSender }
-                        .executes { ctx ->
-                            val instance = Cardea.instance()
-                            ctx.source.sender.sendMessage(Component.text("Password: ${instance.dataStore.getPassword()}"))
-                            return@executes Command.SINGLE_SUCCESS
-                        }
-                )
-                .then(
-                    Commands.literal("invalidate")
-                    .requires { sender -> sender.sender is ConsoleCommandSender }
-                        .then(Commands.argument("player", ArgumentTypes.player())
-                            .executes { ctx ->
-                                val targetResolver = ctx.getArgument("player", PlayerSelectorArgumentResolver::class.java)
-                                val target = targetResolver.resolve(ctx.getSource()).first()
-                                Cardea.instance().dataStore.removeLogged(target.uniqueId)
-                                return@executes Command.SINGLE_SUCCESS
-                            }
-                        )
-                )
-                .build()
-            commands.registrar().register(command)
+            commands.registrar().register(root)
         }
     }
 

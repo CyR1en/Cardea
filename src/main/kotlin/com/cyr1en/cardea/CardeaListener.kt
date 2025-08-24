@@ -1,7 +1,5 @@
-package com.cyr1en.cardea.listener
+package com.cyr1en.cardea
 
-import com.cyr1en.cardea.Cardea
-import com.cyr1en.cardea.Util.Companion.secToTicks
 import io.papermc.paper.connection.PlayerCommonConnection
 import io.papermc.paper.event.connection.configuration.AsyncPlayerConnectionConfigureEvent
 import io.papermc.paper.event.player.PlayerCustomClickEvent
