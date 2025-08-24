@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Cardea Config",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "dialog": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "title": { "type": "string" },
+        "body": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 0,
+          "maxItems": 10
+        },
+        "inputPrompt": { "type": "string" },
+        "buttons": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "submitLabel": { "type": "string" },
+            "submitHover": { "type": "string" },
+            "cancelLabel": { "type": "string" },
+            "cancelHover": { "type": "string" }
+          },
+          "required": [
+            "submitLabel",
+            "submitHover",
+            "cancelLabel",
+            "cancelHover"
+          ]
+        },
+        "loginResult": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "success": { "type": "string" },
+            "incorrect": { "type": "string" },
+            "cancelled": { "type": "string" },
+            "timeout": { "type": "string" }
+          },
+          "required": [
+            "success",
+            "incorrect",
+            "cancelled",
+            "timeout"
+          ]
+        }
+      },
+      "required": [
+        "title",
+        "body",
+        "inputPrompt",
+        "buttons",
+        "loginResult"
+      ]
+    }
+  },
+  "required": ["dialog"]
+}
