@@ -1,0 +1,7 @@
+name: Cardea
+version: '1.0.0-SNAPSHOT'
+main: com.cyr1en.cardea.Cardea
+api-version: '1.21'
+authors: [ CyR1en ]
+description: A simple login dialog at player connection configuration
+bootstrapper: com.cyr1en.cardea.CardeaBootstrapper
