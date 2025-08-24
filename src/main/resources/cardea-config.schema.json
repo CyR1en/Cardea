@@ -1,9 +1,14 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Cardea Config",
   "type": "object",
   "additionalProperties": false,
   "properties": {
+    "$schema": {
+      "type": "string",
+      "format": "uri-reference",
+      "description": "Reference to the schema used by tools/editors."
+    },
     "dialog": {
       "type": "object",
       "additionalProperties": false,
