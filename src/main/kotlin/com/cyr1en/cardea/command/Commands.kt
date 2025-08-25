@@ -1,6 +1,8 @@
 package com.cyr1en.cardea.command
 
+import com.cyr1en.cardea.ColorPalette.*
 import com.cyr1en.cardea.dataStore
+import com.cyr1en.cardea.mm
 import com.cyr1en.cardea.msg
 import com.cyr1en.cardea.reloadConfig
 import com.mojang.brigadier.Command
@@ -35,12 +37,12 @@ class Password : CardeaCommand("pwd") {
     override fun run(ctx: CommandContext<CommandSourceStack>): Int {
         val pwd = StringArgumentType.getString(ctx, "pwd")
         if (pwd.isEmpty()) {
-            msg(ctx, "<red>Password cannot be empty!</red>")
+            msg(ctx, "<color:${RED}>Password cannot be empty!</color>")
             return Command.SINGLE_SUCCESS
         }
         dataStore.removeAllLogged()
         dataStore.setPassword(pwd)
-        msg(ctx, "<green>Invalidated all UUIDs and password set!</green>")
+        msg(ctx, "<color:${GREEN}>Password set! All UUIDs invalidated.</color>")
         return Command.SINGLE_SUCCESS
     }
 }
@@ -48,7 +50,7 @@ class Password : CardeaCommand("pwd") {
 class ShowPassword : CardeaCommand("showpwd") {
     override fun run(ctx: CommandContext<CommandSourceStack>): Int {
         val pwd = dataStore.getPassword()
-        msg(ctx, "Cardea Password is <green>${pwd}</green>")
+        msg(ctx, "Cardea Password is <color:${GREEN}><b>${pwd}<b></color>")
         return Command.SINGLE_SUCCESS
     }
 }
@@ -70,6 +72,7 @@ class Invalidate : CardeaCommand("invalidate") {
 class Reload : CardeaCommand("reload") {
     override fun run(ctx: CommandContext<CommandSourceStack>): Int {
         reloadConfig()
+        msg(ctx, "<color:${GREEN}>Reloaded config!</color>")
         return Command.SINGLE_SUCCESS
     }
 }

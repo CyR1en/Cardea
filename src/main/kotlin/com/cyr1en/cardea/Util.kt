@@ -24,3 +24,11 @@ fun msg(sender: CommandSender, msg: String) =
     )
 
 fun msg(ctx: CommandContext<CommandSourceStack>, msg: String) = msg(ctx.source.sender, msg)
+
+enum class ColorPalette(val hex: String) {
+    RED("#e78284"),
+    GREEN("#a6d189"),
+    BLUE("#8caaee"),
+    MAUVE(" #ca9ee6"),
+    SUBTEXT1("#b5bfe2")
+}
