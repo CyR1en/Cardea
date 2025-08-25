@@ -2,3 +2,9 @@
 /.gradle/
 /build/
 /build/classes/kotlin/main/
+
+.idea/
+*.iml
+*.iws
+
+.kotlin/
