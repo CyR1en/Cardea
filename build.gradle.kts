@@ -19,7 +19,6 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("com.h2database:h2:2.3.232")
     implementation("com.zaxxer:HikariCP:5.1.0")
-
 }
 
 tasks {
@@ -36,8 +35,20 @@ kotlin {
     jvmToolchain(targetJavaVersion)
 }
 
+tasks.shadowJar {
+    archiveClassifier.set("")
+
+    val shadeBase = "${project.group}.shade"
+    relocate("com.zaxxer.hikari", "$shadeBase.hikari")
+    relocate("org.h2", "$shadeBase.h2")
+}
+
 tasks.build {
     dependsOn("shadowJar")
+}
+
+tasks.jar {
+    enabled = false
 }
 
 tasks.processResources {
