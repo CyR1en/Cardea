@@ -51,7 +51,7 @@ class DialogListener(plugin: Cardea) : Listener {
             event.connection.disconnect(result.msg)
             _awaitingResponse.remove(event.connection)
         } else {
-            dataStore.addLogged(uuid)
+            dataStore.addLogged(uuid, event.connection.profile.name!!)
             _awaitingResponse.remove(event.connection)
         }
     }

@@ -52,7 +52,8 @@ class DataStore(
                 it.execute(
                     """
                     CREATE TABLE IF NOT EXISTS logged_players (
-                        uuid VARCHAR(36) PRIMARY KEY
+                        uuid VARCHAR(36) PRIMARY KEY,
+                        username VARCHAR(16)
                     )
                     """.trimIndent()
                 )
@@ -89,10 +90,11 @@ class DataStore(
 
     fun hasPassword(): Boolean = getPassword()?.isNotEmpty() == true
 
-    fun addLogged(uuid: UUID) {
+    fun addLogged(uuid: UUID, username: String) {
         dataSource.connection.use { conn ->
-            conn.prepareStatement("MERGE INTO logged_players (uuid) KEY(uuid) VALUES (?)").use { ps ->
+            conn.prepareStatement("MERGE INTO logged_players (uuid, username) KEY(uuid) VALUES (?, ?)").use { ps ->
                 ps.setString(1, uuid.toString())
+                ps.setString(2, username)
                 ps.executeUpdate()
             }
         }
@@ -112,6 +114,39 @@ class DataStore(
             conn.prepareStatement("DELETE FROM logged_players WHERE uuid = ?").use { ps ->
                 ps.setString(1, uuid.toString())
                 ps.executeUpdate()
+            }
+        }
+    }
+
+    fun removeLogged(username: String) {
+        dataSource.connection.use { conn ->
+            conn.prepareStatement("DELETE FROM logged_players WHERE username = ?").use { ps ->
+                ps.setString(1, username)
+                ps.executeUpdate()
+            }
+        }
+    }
+
+    fun hasLogged(username: String): Boolean {
+        dataSource.connection.use { conn ->
+            conn.prepareStatement("SELECT 1 FROM logged_players WHERE username = ?").use { ps ->
+                ps.setString(1, username)
+                ps.executeQuery().use { rs -> return rs.next() }
+            }
+        }
+    }
+
+    fun getLoggedUsernames(): List<String> {
+        dataSource.connection.use { conn ->
+            conn.prepareStatement("SELECT username FROM logged_players").use { ps ->
+                ps.executeQuery().use { rs ->
+                    val result = mutableListOf<String>()
+                    while (rs.next()) {
+                        val name = rs.getString("username")
+                        if (name != null) result += name
+                    }
+                    return result
+                }
             }
         }
     }
