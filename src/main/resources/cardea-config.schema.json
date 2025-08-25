@@ -13,6 +13,7 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
+        "timeout": { "type": "number" },
         "title": { "type": "string" },
         "body": {
           "type": "array",
