@@ -1,5 +1,5 @@
 name: Cardea
-version: '1.0.0-SNAPSHOT'
+version: '${version}'
 main: com.cyr1en.cardea.Cardea
 api-version: '1.21'
 authors: [ CyR1en ]
