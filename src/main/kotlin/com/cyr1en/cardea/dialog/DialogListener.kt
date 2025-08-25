@@ -7,11 +7,9 @@ import com.cyr1en.cardea.getKey
 import com.cyr1en.cardea.mm
 import com.cyr1en.cardea.secToTicks
 import io.papermc.paper.connection.PlayerCommonConnection
+import io.papermc.paper.dialog.Dialog
 import io.papermc.paper.event.connection.configuration.AsyncPlayerConnectionConfigureEvent
 import io.papermc.paper.event.player.PlayerCustomClickEvent
-import io.papermc.paper.registry.RegistryAccess
-import io.papermc.paper.registry.RegistryKey
-import net.kyori.adventure.key.Key
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.logger.slf4j.ComponentLogger
 import org.bukkit.Bukkit
@@ -31,8 +29,12 @@ class DialogListener(plugin: Cardea) : Listener {
         val uuid = event.connection.profile.id ?: return
         if (dataStore.hasLogged(uuid) || !dataStore.hasPassword()) return
 
-        val dialog =
-            RegistryAccess.registryAccess().getRegistry(RegistryKey.DIALOG).get(Key.key("cardea:login")) ?: return
+        val holder = LoginDialogHolder()
+        val dialog = Dialog.create { it.empty()
+            .base(holder.base)
+            .type(holder.type)
+        }
+
         val response = CompletableFuture<LoginResult>()
 
         Bukkit.getScheduler().runTaskLater(_plugin, Runnable {

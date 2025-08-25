@@ -1,7 +1,6 @@
 package com.cyr1en.cardea
 
 import com.cyr1en.cardea.command.CommandsBootstrapper
-import com.cyr1en.cardea.dialog.DialogBootstrapper
 import com.cyr1en.cardea.dialog.DialogListener
 import io.papermc.paper.plugin.bootstrap.BootstrapContext
 import io.papermc.paper.plugin.bootstrap.PluginBootstrap
@@ -28,7 +27,6 @@ class Cardea() : JavaPlugin() {
 class CardeaBootstrapper : PluginBootstrap {
 
     override fun bootstrap(context: BootstrapContext) {
-        DialogBootstrapper(context).bootstrap()
         CommandsBootstrapper(context).bootstrap()
     }
 
