@@ -12,9 +12,7 @@ import com.mojang.brigadier.builder.RequiredArgumentBuilder
 import com.mojang.brigadier.context.CommandContext
 import io.papermc.paper.command.brigadier.CommandSourceStack
 import io.papermc.paper.command.brigadier.Commands
-import io.papermc.paper.command.brigadier.argument.ArgumentTypes
-import io.papermc.paper.command.brigadier.argument.resolvers.selector.PlayerSelectorArgumentResolver
-import org.bukkit.Server
+import org.bukkit.Bukkit
 
 abstract class CardeaCommand(name: String) : Command<CommandSourceStack> {
 
@@ -57,14 +55,30 @@ class ShowPassword : CardeaCommand("showpwd") {
 
 class Invalidate : CardeaCommand("invalidate") {
     init {
-        requiredArg = Commands.argument("player", ArgumentTypes.player())
+        requiredArg = Commands.argument("target", StringArgumentType.greedyString())
+            .suggests { ctx, builder ->
+                val names = dataStore.getLoggedUsernames()
+                names.forEach { builder.suggest(it) }
+                if (!names.isEmpty()) builder.suggest("all")
+                return@suggests builder.buildFuture()
+            }
     }
 
     override fun run(ctx: CommandContext<CommandSourceStack>): Int {
-        val targetResolver = ctx.getArgument("player", PlayerSelectorArgumentResolver::class.java)
-        val target = targetResolver.resolve(ctx.getSource()).first()
-        dataStore.removeLogged(target.uniqueId)
-        ctx.source.sender.sendMessage("Invalidated ${target.uniqueId}")
+        val target = StringArgumentType.getString(ctx, "target")
+        if (target == "all") {
+            dataStore.removeAllLogged()
+            msg(ctx, "<color:${GREEN}>All UUIDs invalidated!</color>")
+            Bukkit.getOnlinePlayers().forEach { it.kick(mm("<color:${RED}>Your login for this server has been invalidated!</color>")) }
+            return Command.SINGLE_SUCCESS
+        }
+        if (!dataStore.hasLogged(target)) {
+            msg(ctx, "<color:${RED}>Player has never logged in!</color>")
+            return Command.SINGLE_SUCCESS
+        }
+        dataStore.removeLogged(target)
+        msg(ctx, "Invalidated <color:${GREEN}><b>${target}</b></color>!")
+        Bukkit.getPlayer(target)?.kick(mm("<color:${RED}>Your login for this server has been invalidated!</color>"))
         return Command.SINGLE_SUCCESS
     }
 }
