@@ -43,7 +43,7 @@ class DataStore(
             conn.createStatement().use {
                 it.execute(
                     """
-                    CREATE TABLE IF NOT EXISTS app_password (
+                    CREATE TABLE IF NOT EXISTS cardea_password (
                         id INT PRIMARY KEY CHECK (id = 1),
                         password_value VARCHAR(255)
                     )
@@ -61,9 +61,9 @@ class DataStore(
 
             conn.prepareStatement(
                 """
-                INSERT INTO app_password (id, password_value)
+                INSERT INTO cardea_password (id, password_value)
                 SELECT 1, NULL
-                WHERE NOT EXISTS (SELECT 1 FROM app_password WHERE id = 1)
+                WHERE NOT EXISTS (SELECT 1 FROM cardea_password WHERE id = 1)
                 """.trimIndent()
             ).use { it.executeUpdate() }
         }
@@ -71,7 +71,7 @@ class DataStore(
 
     fun getPassword(): String? {
         dataSource.connection.use { conn ->
-            conn.prepareStatement("SELECT password_value FROM app_password WHERE id = 1").use { ps ->
+            conn.prepareStatement("SELECT password_value FROM cardea_password WHERE id = 1").use { ps ->
                 ps.executeQuery().use { rs ->
                     return if (rs.next()) rs.getString("password_value") else null
                 }
@@ -81,7 +81,7 @@ class DataStore(
 
     fun setPassword(newPassword: String?) {
         dataSource.connection.use { conn ->
-            conn.prepareStatement("UPDATE app_password SET password_value = ? WHERE id = 1").use { ps ->
+            conn.prepareStatement("UPDATE cardea_password SET password_value = ? WHERE id = 1").use { ps ->
                 if (newPassword == null) ps.setNull(1, java.sql.Types.VARCHAR) else ps.setString(1, newPassword)
                 ps.executeUpdate()
             }
