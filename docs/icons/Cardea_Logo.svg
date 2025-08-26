@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="164.99998mm"
+   height="164.99998mm"
+   viewBox="0 0 164.99998 164.99998"
+   version="1.1"
+   id="svg1"
+   inkscape:export-batch-path="D:\Documents\Projects\Java\Cardea\docs\icons"
+   inkscape:export-batch-name="Cardea"
+   inkscape:version="1.4.2 (f4327f4, 2025-05-13)"
+   sodipodi:docname="Cardea_Logo.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     showgrid="false"
+     showguides="true"
+     inkscape:zoom="0.39671176"
+     inkscape:cx="-85.704542"
+     inkscape:cy="715.885"
+     inkscape:window-width="1707"
+     inkscape:window-height="1342"
+     inkscape:window-x="2298"
+     inkscape:window-y="398"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1">
+    <inkscape:grid
+       id="grid5"
+       units="mm"
+       originx="-22.92921"
+       originy="-64.896515"
+       spacingx="0.99999998"
+       spacingy="1"
+       empcolor="#0099e5"
+       empopacity="0.30196078"
+       color="#0099e5"
+       opacity="0.14901961"
+       empspacing="5"
+       enabled="true"
+       visible="false" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="Logo"
+     transform="translate(-22.929209,-64.896519)">
+    <g
+       inkscape:label="Layer 1"
+       inkscape:groupmode="layer"
+       id="layer1">
+      <rect
+         style="fill:#181825;fill-opacity:1;stroke:none;stroke-width:0.378456"
+         id="rect1"
+         width="164.62154"
+         height="164.62154"
+         x="23.118437"
+         y="65.085747"
+         ry="14.619554"
+         rx="14.619553"
+         inkscape:label="rect1" />
+    </g>
+    <a
+       id="a8"
+       transform="translate(-4.5169148,8.7245666)">
+      <g
+         inkscape:groupmode="layer"
+         id="layer2"
+         inkscape:label="Layer 2"
+         transform="matrix(0.82598463,0,0,0.81903803,28.944051,18.148281)"
+         style="stroke-width:1.2158">
+        <path
+           style="fill:#181825;fill-opacity:1;stroke:#cba6f7;stroke-width:12.8672;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
+           d="m 105,105.5 c 0,0 -42.867713,-0.13229 -43.000004,43 C 61.867705,191.63229 105,191.5 105,191.5"
+           id="path7"
+           sodipodi:nodetypes="csc" />
+        <path
+           style="fill:#f38ba8;fill-opacity:1;stroke:#f38ba8;stroke-width:12.8672;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+           d="m 127.32812,148.5 h 36.40589"
+           id="path5"
+           sodipodi:nodetypes="cc" />
+        <circle
+           style="fill:#f38ba8;fill-opacity:1;stroke:none;stroke-width:0.460789"
+           id="path3"
+           cx="105"
+           cy="148.5"
+           r="25.499495" />
+        <path
+           style="display:inline;fill:#181825;fill-opacity:1;stroke:#cba6f7;stroke-width:12.8672;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
+           d="M 61.999994,148.5 H 31.3613"
+           id="path8" />
+      </g>
+    </a>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="Lines"
+     style="display:inline"
+     transform="translate(-22.929209,-64.896519)" />
+</svg>
