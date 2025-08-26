@@ -1,10 +1,11 @@
 package com.cyr1en.cardea.command
 
 import com.cyr1en.cardea.ColorPalette.*
+import com.cyr1en.cardea.cfg
 import com.cyr1en.cardea.dataStore
 import com.cyr1en.cardea.mm
 import com.cyr1en.cardea.msg
-import com.cyr1en.cardea.reloadConfig
+import com.cyr1en.cardea.reloadJsonConfig
 import com.mojang.brigadier.Command
 import com.mojang.brigadier.arguments.StringArgumentType
 import com.mojang.brigadier.builder.LiteralArgumentBuilder
@@ -69,7 +70,10 @@ class Invalidate : CardeaCommand("invalidate") {
         if (target == "all") {
             dataStore.removeAllLogged()
             msg(ctx, "<color:${GREEN}>All UUIDs invalidated!</color>")
-            Bukkit.getOnlinePlayers().forEach { it.kick(mm("<color:${RED}>Your login for this server has been invalidated!</color>")) }
+
+            if (cfg().kickOnInvalidation.enabled)
+                Bukkit.getOnlinePlayers().forEach { it.kick(mm(cfg().kickOnInvalidation.message)) }
+
             return Command.SINGLE_SUCCESS
         }
         if (!dataStore.hasLogged(target)) {
@@ -78,14 +82,15 @@ class Invalidate : CardeaCommand("invalidate") {
         }
         dataStore.removeLogged(target)
         msg(ctx, "Invalidated <color:${GREEN}><b>${target}</b></color>!")
-        Bukkit.getPlayer(target)?.kick(mm("<color:${RED}>Your login for this server has been invalidated!</color>"))
+        if (cfg().kickOnInvalidation.enabled)
+            Bukkit.getPlayer(target)?.kick(mm(cfg().kickOnInvalidation.message))
         return Command.SINGLE_SUCCESS
     }
 }
 
 class Reload : CardeaCommand("reload") {
     override fun run(ctx: CommandContext<CommandSourceStack>): Int {
-        reloadConfig()
+        reloadJsonConfig()
         msg(ctx, "<color:${GREEN}>Reloaded config!</color>")
         return Command.SINGLE_SUCCESS
     }

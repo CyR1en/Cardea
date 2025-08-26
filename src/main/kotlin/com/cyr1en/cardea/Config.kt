@@ -16,6 +16,7 @@ val gson: Gson = GsonBuilder()
 val defaultPath: Path = Paths.get("plugins/Cardea/config.json")
 
 data class Config(
+    val kickOnInvalidation: KickOnInvalidation = KickOnInvalidation(),
     val dialog: DialogConfig = DialogConfig()
 )
 
@@ -40,6 +41,11 @@ data class LoginResults(
     val incorrect: String = "<red>Incorrect Password!</red>",
     val cancelled: String = "<red>Login Cancelled!</red>",
     val timeout: String = "<red>Login Timeout!</red>"
+)
+
+data class KickOnInvalidation(
+    val enabled: Boolean = true,
+    val message: String = "<color:${RED}>Your login for this server has been invalidated.</color>"
 )
 
 fun serializeConfig(path: Path = defaultPath, config: Config, schemaUrl: String? = null) {

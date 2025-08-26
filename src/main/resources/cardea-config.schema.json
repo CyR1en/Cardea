@@ -9,6 +9,18 @@
       "format": "uri-reference",
       "description": "Reference to the schema used by tools/editors."
     },
+    "kickOnInvalidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "message": { "type": "string" }
+      },
+      "required": [
+        "enabled",
+        "message"
+      ]
+    },
     "dialog": {
       "type": "object",
       "additionalProperties": false,
