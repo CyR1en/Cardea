@@ -1,5 +1,6 @@
 package com.cyr1en.cardea
 
+import com.cyr1en.cardea.ColorPalette.*
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonObject
@@ -15,6 +16,9 @@ val gson: Gson = GsonBuilder()
 
 val defaultPath: Path = Paths.get("plugins/Cardea/config.json")
 
+private var jsonConfig: Config = deserializeConfig()
+fun cfg(): Config = jsonConfig
+
 data class Config(
     val kickOnInvalidation: KickOnInvalidation = KickOnInvalidation(),
     val dialog: DialogConfig = DialogConfig()
@@ -22,18 +26,18 @@ data class Config(
 
 data class DialogConfig(
     val timeout: Int = 60,
-    val title: String = "<color:#ca9ee6>Cardea Login",
-    val body: List<String> = listOf("<color:#a5adce>To prevent unauthorized access, please enter the server password below.", "", ""),
-    val inputPrompt: String = "<color:#a6d189>Enter password here",
+    val title: String = "<color:${MAUVE}>Cardea Login",
+    val body: List<String> = listOf("<color:${SUBTEXT1}>To prevent unauthorized access, please enter the server password below.", "", ""),
+    val inputPrompt: String = "<color:${GREEN}>Enter password here",
     val buttons: ButtonConfig = ButtonConfig(),
     val loginResult: LoginResults = LoginResults()
 )
 
 data class ButtonConfig(
-    val submitLabel: String = "<color:#ca9ee6>Submit",
-    val submitHover: String = "<color:#838ba7>Click here to submit password.",
-    val cancelLabel: String = "<color:#e78284>Cancel",
-    val cancelHover: String = "<color:#838ba7>Click here to cancel login."
+    val submitLabel: String = "<color:${MAUVE}>Submit",
+    val submitHover: String = "<color:${SUBTEXT1}>Click here to submit password.",
+    val cancelLabel: String = "<color:${RED}>Cancel",
+    val cancelHover: String = "<color:${SUBTEXT1}>Click here to cancel login."
 )
 
 data class LoginResults(
@@ -82,10 +86,7 @@ fun deserializeConfig(path: Path = defaultPath): Config {
     }
 }
 
-fun reloadConfig() {
+fun reloadJsonConfig() {
     jsonConfig = deserializeConfig()
 }
-
-private var jsonConfig: Config = deserializeConfig()
-fun cfg(): Config = jsonConfig
 
