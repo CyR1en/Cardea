@@ -24,7 +24,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4.6.2
         with:
-          name: CommandPrompter
+          name: Cardea
           path: build/libs
 
   publish:
