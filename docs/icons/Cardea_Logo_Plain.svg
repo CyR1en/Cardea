@@ -15,7 +15,8 @@
      id="layer4"
      transform="translate(-23.118437,-65.085747)">
     <g
-       id="layer1">
+       id="layer1"
+       style="display:inline">
       <rect
          style="fill:#181825;fill-opacity:1;stroke:none;stroke-width:0.378456"
          id="rect1"
@@ -26,30 +27,42 @@
          ry="14.619554"
          rx="14.619553" />
     </g>
+    <g
+       id="layer3"
+       style="display:inline;fill:none;stroke:#ffffff;stroke-dasharray:1, 1;stroke-dashoffset:0;stroke-opacity:0.260241">
+      <ellipse
+         style="display:none;fill:none;stroke:#ffffff;stroke-width:1;stroke-linecap:round;stroke-dasharray:1, 8;stroke-dashoffset:0;stroke-opacity:0.260241;paint-order:fill markers stroke"
+         id="path1"
+         cx="105.42921"
+         cy="147.39651"
+         rx="57.05352"
+         ry="57.523659" />
+    </g>
     <a
        id="a8"
-       transform="translate(-4.5169148,8.7245666)">
+       transform="matrix(1.2842401,0,0,1.2915758,-209.51856,-33.134053)"
+       style="display:inline;stroke-width:0.776456">
       <g
          id="layer2"
-         transform="matrix(0.82598463,0,0,0.81903803,28.944051,18.148281)"
-         style="stroke-width:1.2158">
+         transform="matrix(0.82598463,0,0,0.81903803,37.503825,18.148281)"
+         style="stroke-width:0.944015">
         <path
-           style="fill:#181825;fill-opacity:1;stroke:#cba6f7;stroke-width:12.8672;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
-           d="m 105,105.5 c 0,0 -42.867713,-0.13229 -43.000004,43 C 61.867705,191.63229 105,191.5 105,191.5"
+           style="fill:none;fill-opacity:1;stroke:#cba6f7;stroke-width:9.99082;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
+           d="m 263.52826,105.5 c 0,0 -42.86772,-0.13229 -43.00001,43 -0.13229,43.13229 43.00001,43 43.00001,43"
            id="path7" />
         <path
-           style="fill:#f38ba8;fill-opacity:1;stroke:#f38ba8;stroke-width:12.8672;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
-           d="m 127.32812,148.5 h 36.40589"
+           style="fill:#f38ba8;fill-opacity:1;stroke:#f38ba8;stroke-width:9.99082;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+           d="m 274.1546,148.50002 h 30.07425"
            id="path5" />
         <circle
-           style="fill:#f38ba8;fill-opacity:1;stroke:none;stroke-width:0.460789"
+           style="fill:#f38ba8;fill-opacity:1;stroke:none;stroke-width:0.357783"
            id="path3"
-           cx="105"
-           cy="148.5"
+           cx="263.69223"
+           cy="148.50002"
            r="25.499495" />
         <path
-           style="display:inline;fill:#181825;fill-opacity:1;stroke:#cba6f7;stroke-width:12.8672;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
-           d="M 61.999994,148.5 H 31.3613"
+           style="display:inline;fill:#181825;fill-opacity:1;stroke:#cba6f7;stroke-width:9.99082;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
+           d="m 220.52825,148.5 -21.75322,1e-5"
            id="path8" />
       </g>
     </a>
