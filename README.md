@@ -2,10 +2,11 @@
 <h1 align="center">
      <img width=600 src="docs/icons/Cardea_Banner.png"/>
      <p align="center">
-  <a href="https://github.com/CyR1en/Cardea/releases/latest"><img src="https://img.shields.io/github/v/release/cyr1en/Cardea?colorA=363a4f&colorB=a6da95&style=for-the-badge&logo=github&logoColor=cad3f5"></a>
-  <a href="https://github.com/CyR1en/Cardea/releaseslatest"><img src="https://img.shields.io/github/license/cyr1en/Cardea?colorA=363a4f&colorB=91d7e3&style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2Ij4KPHBhdGggZD0iTTIxNiwzMlYxOTJhOCw4LDAsMCwxLTgsOEg3MmExNiwxNiwwLDAsMC0xNiwxNkgxOTJhOCw4LDAsMCwxLDAsMTZINDhhOCw4LDAsMCwxLTgtOFY1NkEzMiwzMiwwLDAsMSw3MiwyNEgyMDhBOCw4LDAsMCwxLDIxNiwzMloiIHN0eWxlPSJmaWxsOiAjQ0FEM0Y1OyIvPgo8L3N2Zz4=&logoColor=cad3f5"></a>
-  <a href="https://discord.com/servers/936346802402238514"><img src="https://img.shields.io/discord/936346802402238514?style=for-the-badge&color=b7bdf8&labelColor=363a4f&logo=discord&logoColor=cad3f5"></a>
-</p>
+       <a href="https://github.com/CyR1en/Cardea/releases/latest"><img src="https://img.shields.io/github/v/release/cyr1en/Cardea?colorA=363a4f&colorB=a6da95&style=for-the-badge&logo=github&logoColor=cad3f5"></a>
+       <a href="https://github.com/CyR1en/Cardea/releaseslatest"><img src="https://img.shields.io/github/license/cyr1en/Cardea?colorA=363a4f&colorB=91d7e3&style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2Ij4KPHBhdGggZD0iTTIxNiwzMlYxOTJhOCw4LDAsMCwxLTgsOEg3MmExNiwxNiwwLDAsMC0xNiwxNkgxOTJhOCw4LDAsMCwxLDAsMTZINDhhOCw4LDAsMCwxLTgtOFY1NkEzMiwzMiwwLDAsMSw3MiwyNEgyMDhBOCw4LDAsMCwxLDIxNiwzMloiIHN0eWxlPSJmaWxsOiAjQ0FEM0Y1OyIvPgo8L3N2Zz4=&logoColor=cad3f5"></a>
+       <a href="https://discord.com/invite/qHM8kE4XHj"><img src="https://img.shields.io/discord/936346802402238514?style=for-the-badge&color=b7bdf8&labelColor=363a4f&logo=discord&logoColor=cad3f5"></a>
+       <a href="https://ko-fi.com/cyr1en"><img src="https://img.shields.io/badge/Kofi-Support_Development-f5a97f?style=for-the-badge&logo=Kofi&logoColor=cad3f5&labelColor=363a4f"></a>
+     </p>
 </h1>
 
 Cardea is an open-source PaperMC plugin that provides an alternative to whitelisting a server. This is done by implementing a login dialog using the new DialogAPI introduced in Paper 1.21.7.
