@@ -10,6 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin
 
 class Cardea() : JavaPlugin() {
     override fun onEnable() {
+        warnIfOffline()
         reloadJsonConfig()
         if (!dataStore.hasPassword()) {
             logger.warning("No password has been set. Please set one by using /cardea pwd <password>.")

@@ -7,8 +7,12 @@ import io.papermc.paper.registry.TypedKey
 import io.papermc.paper.registry.keys.DialogKeys
 import net.kyori.adventure.key.Key
 import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.logger.slf4j.ComponentLogger
 import net.kyori.adventure.text.minimessage.MiniMessage
+import org.bukkit.Bukkit
 import org.bukkit.command.CommandSender
+
+val logger get() = ComponentLogger.logger("Cardea")
 
 fun secToTicks(seconds: Int) = seconds * 20L
 
@@ -24,6 +28,15 @@ fun msg(sender: CommandSender, msg: String) =
     )
 
 fun msg(ctx: CommandContext<CommandSourceStack>, msg: String) = msg(ctx.source.sender, msg)
+
+fun warnIfOffline() {
+    if (isOfflineMode()) {
+        logger.warn("You are currently running Cardea in a server that is in offline mode.")
+        logger.warn("This may cause some issues with Cardea's login dialog.")
+    }
+}
+
+fun isOfflineMode() = !Bukkit.getOnlineMode()
 
 enum class ColorPalette(val hex: String) {
     RED("#e78284"),
