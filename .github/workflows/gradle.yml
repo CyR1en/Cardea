@@ -38,6 +38,8 @@ jobs:
           distribution: temurin
           java-version: 21
       - name: Build and Publish to Modrinth
+        env:
+          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
         run: ./gradlew clean build modrinth
       - name: Export LATEST_TAG
         run: |
