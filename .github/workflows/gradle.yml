@@ -37,6 +37,8 @@ jobs:
         with:
           distribution: temurin
           java-version: 21
+      - name: Build artifact
+        run: ./gradlew clean build
       - name: Export LATEST_TAG
         run: |
           echo "LATEST_TAG=$(curl -qsSL \
