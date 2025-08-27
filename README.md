@@ -9,7 +9,7 @@
      </p>
 </h1>
 
-Cardea is an open-source PaperMC plugin that provides an alternative to whitelisting a server. This is done by implementing a login dialog using the new DialogAPI introduced in Paper 1.21.7.
+Cardea is an open-source PaperMC plugin written in Kotlin that provides an alternative to whitelisting a server. This is done by implementing a login dialog using the new DialogAPI introduced in Paper 1.21.7.
 
 Features:
 - **Easy to setup** - Simply drop it in your plugins folder and set your password.
