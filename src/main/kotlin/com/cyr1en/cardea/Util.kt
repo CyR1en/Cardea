@@ -29,8 +29,8 @@ enum class ColorPalette(val hex: String) {
     RED("#e78284"),
     GREEN("#a6d189"),
     BLUE("#8caaee"),
-    MAUVE(" #ca9ee6"),
+    MAUVE("#ca9ee6"),
     SUBTEXT1("#b5bfe2");
 
-    override fun toString(): String = hex
+    override fun toString(): String = hex.trim()
 }
