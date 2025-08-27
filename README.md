@@ -24,6 +24,7 @@ Features:
      </p>
 </details>
 
+<!-- modrinth_exclude.start -->
 ## Building
 
 Cardea uses Gradle as a project manager. You can build Cardea for yourself by following the instructions below:
@@ -38,6 +39,7 @@ git clone https://github.com/CyR1en/Cardea.git
 cd Cardea/
 ./gradlew clean build
 ```
+<!-- modrinth_exclude.end -->
 
 ## Special Thanks To:
 <div align="Left">
