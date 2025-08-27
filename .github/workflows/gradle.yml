@@ -52,3 +52,17 @@ jobs:
           GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         run:
           gh release upload ${{ env.LATEST_TAG }} build/libs/*.jar
+      - name: Upload to Modrinth
+        uses: cloudnode-pro/modrinth-publish@v2
+        with:
+          token: ${{ secrets.MODRINTH_TOKEN }}
+          project: 3C31Qs54
+          name: ${{ github.event.release.name }}
+          version: ${{ github.event.release.tag_name }}
+          changelog: ${{ github.event.release.body }}
+          loaders: |-
+            paper
+          game-versions: |-
+            1.20.8
+            1.21.7
+          files: build/libs/Cardea-${{ github.event.release.tag_name }}.jar
