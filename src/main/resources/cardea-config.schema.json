@@ -9,7 +9,7 @@
       "format": "uri-reference",
       "description": "Reference to the schema used by tools/editors."
     },
-    "kickOnInvalidate": {
+    "kickOnInvalidation": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
