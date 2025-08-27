@@ -21,7 +21,7 @@ Features:
 <details>
      <summary>Preview</summary>
      <p align="center">
-         <img width="600" src="https://github.com/CyR1en/Cardea/blob/master/docs/img.png">
+         <img width="600" src="https://raw.githubusercontent.com/CyR1en/Cardea/refs/heads/master/docs/img.png">
      </p>
 </details>
 <!-- modrinth_exclude.start -->
