@@ -25,6 +25,7 @@ Features:
      </p>
 </details>
 <!-- modrinth_exclude.start -->
+
 ## Building
 
 Cardea uses Gradle as a project manager. You can build Cardea for yourself by following the instructions below:
