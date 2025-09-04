@@ -59,14 +59,11 @@ class DialogListener(plugin: Cardea) : Listener {
     @EventHandler
     fun onHandleDialog(event: PlayerCustomClickEvent) {
         val identifier = event.identifier
-        logger.info("Received dialog click: $identifier")
         if (identifier != getKey("cardea:login/submit") && identifier != getKey("cardea:login/cancel")) {
-            logger.info("Invalid identifier: $identifier")
             return
         }
 
         if (identifier == getKey("cardea:login/cancel")) {
-            logger.info("Login cancelled.")
             setConnectionJoinResult(event.commonConnection, LoginResult.CANCELLED)
             return
         }
