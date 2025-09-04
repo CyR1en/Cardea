@@ -39,9 +39,13 @@ class Password : CardeaCommand("pwd") {
             msg(ctx, "<color:${RED}>Password cannot be empty!</color>")
             return Command.SINGLE_SUCCESS
         }
-        dataStore.removeAllLogged()
+
         dataStore.setPassword(pwd)
-        msg(ctx, "<color:${GREEN}>Password set! All UUIDs invalidated.</color>")
+        msg(ctx, "<color:${GREEN}>Password set to <color:${MAUVE}>${pwd}</color>!</color>")
+        if(cfg().kickOnInvalidation.enabled) {
+            dataStore.removeAllLogged()
+            msg(ctx, "<color:${GREEN}>All UUIDs invalidated.</color>")
+        }
         return Command.SINGLE_SUCCESS
     }
 }
