@@ -3,6 +3,8 @@
 /build/
 /build/classes/kotlin/main/
 
+/run/
+
 .idea/
 *.iml
 *.iws
