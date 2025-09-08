@@ -30,12 +30,8 @@ dependencies {
     implementation("com.zaxxer:HikariCP:5.1.0")
 }
 
-
 tasks {
     runServer {
-        // Configure the Minecraft version for our task.
-        // This is the only required configuration besides applying the plugin.
-        // Your plugin's jar (or shadowJar if present) will be used automatically.
         minecraftVersion("1.21.8")
     }
 }
@@ -92,12 +88,14 @@ tasks.modrinth {
 fun githubLatestReleaseBody(): String {
     val url = "https://api.github.com/repos/cyr1en/cardea/releases/latest"
     val client = HttpClient.newHttpClient()
-    val request = HttpRequest.newBuilder()
-        .uri(URI.create(url))
-        .header("Accept", "application/vnd.github+json")
-        .header("User-Agent", "gradle-build-script")
-        .GET()
-        .build()
+    val request =
+        HttpRequest
+            .newBuilder()
+            .uri(URI.create(url))
+            .header("Accept", "application/vnd.github+json")
+            .header("User-Agent", "gradle-build-script")
+            .GET()
+            .build()
     val response = client.send(request, HttpResponse.BodyHandlers.ofString())
     if (response.statusCode() / 100 != 2) {
         throw GradleException("Failed to fetch latest release: HTTP ${response.statusCode()} - ${response.body()}")

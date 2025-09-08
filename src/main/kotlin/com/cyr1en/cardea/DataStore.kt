@@ -11,28 +11,30 @@ val dataStore = DataStore()
 
 class DataStore(
     uname: String = "sa",
-    pwd: String = ""
+    pwd: String = "",
 ) {
     private val databasePath: Path = Paths.get("plugins/Cardea/data.db")
     private val jdbcUrl = "jdbc:h2:file:${databasePath.toAbsolutePath()};AUTO_SERVER=TRUE"
 
-    private val dataSource: DataSource = run {
-        Class.forName("org.h2.Driver")
-        val cfg = HikariConfig().apply {
-            jdbcUrl = this@DataStore.jdbcUrl
-            username = uname
-            password = pwd
+    private val dataSource: DataSource =
+        run {
+            Class.forName("org.h2.Driver")
+            val cfg =
+                HikariConfig().apply {
+                    jdbcUrl = this@DataStore.jdbcUrl
+                    username = uname
+                    password = pwd
 
-            maximumPoolSize = 10
-            minimumIdle = 2
-            idleTimeout = 60_000
-            connectionTimeout = 10_000
-            maxLifetime = 30 * 60_000
-            poolName = "CardeaHikariPool"
-            isAutoCommit = true
+                    maximumPoolSize = 10
+                    minimumIdle = 2
+                    idleTimeout = 60_000
+                    connectionTimeout = 10_000
+                    maxLifetime = 30 * 60_000
+                    poolName = "CardeaHikariPool"
+                    isAutoCommit = true
+                }
+            HikariDataSource(cfg)
         }
-        HikariDataSource(cfg)
-    }
 
     init {
         initializeSchema()
@@ -47,7 +49,7 @@ class DataStore(
                         id INT PRIMARY KEY CHECK (id = 1),
                         password_value VARCHAR(255)
                     )
-                    """.trimIndent()
+                    """.trimIndent(),
                 )
                 it.execute(
                     """
@@ -55,17 +57,18 @@ class DataStore(
                         uuid VARCHAR(36) PRIMARY KEY,
                         username VARCHAR(16)
                     )
-                    """.trimIndent()
+                    """.trimIndent(),
                 )
             }
 
-            conn.prepareStatement(
-                """
-                INSERT INTO cardea_password (id, password_value)
-                SELECT 1, NULL
-                WHERE NOT EXISTS (SELECT 1 FROM cardea_password WHERE id = 1)
-                """.trimIndent()
-            ).use { it.executeUpdate() }
+            conn
+                .prepareStatement(
+                    """
+                    INSERT INTO cardea_password (id, password_value)
+                    SELECT 1, NULL
+                    WHERE NOT EXISTS (SELECT 1 FROM cardea_password WHERE id = 1)
+                    """.trimIndent(),
+                ).use { it.executeUpdate() }
         }
     }
 
@@ -90,7 +93,10 @@ class DataStore(
 
     fun hasPassword(): Boolean = getPassword()?.isNotEmpty() == true
 
-    fun addLogged(uuid: UUID, username: String) {
+    fun addLogged(
+        uuid: UUID,
+        username: String,
+    ) {
         dataSource.connection.use { conn ->
             conn.prepareStatement("MERGE INTO logged_players (uuid, username) KEY(uuid) VALUES (?, ?)").use { ps ->
                 ps.setString(1, uuid.toString())

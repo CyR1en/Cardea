@@ -8,7 +8,7 @@ import io.papermc.paper.plugin.bootstrap.PluginProviderContext
 import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
 
-class Cardea() : JavaPlugin() {
+class Cardea : JavaPlugin() {
     override fun onEnable() {
         cfg()
         warnIfOffline()
@@ -26,12 +26,9 @@ class Cardea() : JavaPlugin() {
 
 @Suppress("UnstableApiUsage")
 class CardeaBootstrapper : PluginBootstrap {
-
     override fun bootstrap(context: BootstrapContext) {
         CommandsBootstrapper(context).bootstrap()
     }
 
-    override fun createPlugin(context: PluginProviderContext): JavaPlugin {
-        return Cardea()
-    }
+    override fun createPlugin(context: PluginProviderContext): JavaPlugin = Cardea()
 }

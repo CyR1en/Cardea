@@ -15,8 +15,9 @@ import io.papermc.paper.command.brigadier.CommandSourceStack
 import io.papermc.paper.command.brigadier.Commands
 import org.bukkit.Bukkit
 
-abstract class CardeaCommand(name: String) : Command<CommandSourceStack> {
-
+abstract class CardeaCommand(
+    name: String,
+) : Command<CommandSourceStack> {
     private val _name = name
     val name get() = _name
 
@@ -36,15 +37,15 @@ class Password : CardeaCommand("pwd") {
     override fun run(ctx: CommandContext<CommandSourceStack>): Int {
         val pwd = StringArgumentType.getString(ctx, "pwd")
         if (pwd.isEmpty()) {
-            msg(ctx, "<color:${RED}>Password cannot be empty!</color>")
+            msg(ctx, "<color:$RED>Password cannot be empty!</color>")
             return Command.SINGLE_SUCCESS
         }
 
         dataStore.setPassword(pwd)
-        msg(ctx, "<color:${GREEN}>Password set to <color:${MAUVE}>${pwd}</color>!</color>")
-        if(cfg().kickOnInvalidation.enabled) {
+        msg(ctx, "<color:$GREEN>Password set to <color:$MAUVE>$pwd</color>!</color>")
+        if (cfg().kickOnInvalidation.enabled) {
             dataStore.removeAllLogged()
-            msg(ctx, "<color:${GREEN}>All UUIDs invalidated.</color>")
+            msg(ctx, "<color:$GREEN>All UUIDs invalidated.</color>")
         }
         return Command.SINGLE_SUCCESS
     }
@@ -53,41 +54,45 @@ class Password : CardeaCommand("pwd") {
 class ShowPassword : CardeaCommand("showpwd") {
     override fun run(ctx: CommandContext<CommandSourceStack>): Int {
         val pwd = dataStore.getPassword()
-        msg(ctx, "Cardea Password is <color:${GREEN}><b>${pwd}<b></color>")
+        msg(ctx, "Cardea Password is <color:$GREEN><b>$pwd<b></color>")
         return Command.SINGLE_SUCCESS
     }
 }
 
 class Invalidate : CardeaCommand("invalidate") {
     init {
-        requiredArg = Commands.argument("target", StringArgumentType.greedyString())
-            .suggests { ctx, builder ->
-                val names = dataStore.getLoggedUsernames()
-                names.forEach { builder.suggest(it) }
-                if (!names.isEmpty()) builder.suggest("all")
-                return@suggests builder.buildFuture()
-            }
+        requiredArg =
+            Commands
+                .argument("target", StringArgumentType.greedyString())
+                .suggests { ctx, builder ->
+                    val names = dataStore.getLoggedUsernames()
+                    names.forEach { builder.suggest(it) }
+                    if (!names.isEmpty()) builder.suggest("all")
+                    return@suggests builder.buildFuture()
+                }
     }
 
     override fun run(ctx: CommandContext<CommandSourceStack>): Int {
         val target = StringArgumentType.getString(ctx, "target")
         if (target == "all") {
             dataStore.removeAllLogged()
-            msg(ctx, "<color:${GREEN}>All UUIDs invalidated!</color>")
+            msg(ctx, "<color:$GREEN>All UUIDs invalidated!</color>")
 
-            if (cfg().kickOnInvalidation.enabled)
+            if (cfg().kickOnInvalidation.enabled) {
                 Bukkit.getOnlinePlayers().forEach { it.kick(mm(cfg().kickOnInvalidation.message)) }
+            }
 
             return Command.SINGLE_SUCCESS
         }
         if (!dataStore.hasLogged(target)) {
-            msg(ctx, "<color:${RED}>Player has never logged in!</color>")
+            msg(ctx, "<color:$RED>Player has never logged in!</color>")
             return Command.SINGLE_SUCCESS
         }
         dataStore.removeLogged(target)
-        msg(ctx, "Invalidated <color:${GREEN}><b>${target}</b></color>!")
-        if (cfg().kickOnInvalidation.enabled)
+        msg(ctx, "Invalidated <color:$GREEN><b>$target</b></color>!")
+        if (cfg().kickOnInvalidation.enabled) {
             Bukkit.getPlayer(target)?.kick(mm(cfg().kickOnInvalidation.message))
+        }
         return Command.SINGLE_SUCCESS
     }
 }
@@ -95,7 +100,7 @@ class Invalidate : CardeaCommand("invalidate") {
 class Reload : CardeaCommand("reload") {
     override fun run(ctx: CommandContext<CommandSourceStack>): Int {
         reloadJsonConfig()
-        msg(ctx, "<color:${GREEN}>Reloaded config!</color>")
+        msg(ctx, "<color:$GREEN>Reloaded config!</color>")
         return Command.SINGLE_SUCCESS
     }
 }

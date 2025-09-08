@@ -18,8 +18,9 @@ import org.bukkit.event.Listener
 import java.util.concurrent.CompletableFuture
 
 @Suppress("UnstableApiUsage")
-class DialogListener(plugin: Cardea) : Listener {
-
+class DialogListener(
+    plugin: Cardea,
+) : Listener {
     private val logger = ComponentLogger.logger(this::class.java)
     private val _awaitingResponse = HashMap<PlayerCommonConnection, CompletableFuture<LoginResult>>()
     private val _plugin = plugin
@@ -30,19 +31,26 @@ class DialogListener(plugin: Cardea) : Listener {
         if (dataStore.hasLogged(uuid) || !dataStore.hasPassword()) return
 
         val holder = LoginDialogHolder()
-        val dialog = Dialog.create { it.empty()
-            .base(holder.base)
-            .type(holder.type)
-        }
+        val dialog =
+            Dialog.create {
+                it
+                    .empty()
+                    .base(holder.base)
+                    .type(holder.type)
+            }
 
         val response = CompletableFuture<LoginResult>()
 
-        Bukkit.getScheduler().runTaskLater(_plugin, Runnable {
-            if(!_awaitingResponse.containsKey(event.connection)) return@Runnable
-            setConnectionJoinResult(event.connection, LoginResult.TIMEOUT)
-            event.connection.audience.closeDialog()
-            _awaitingResponse.remove(event.connection)
-        }, secToTicks(cfg().dialog.timeout))
+        Bukkit.getScheduler().runTaskLater(
+            _plugin,
+            Runnable {
+                if (!_awaitingResponse.containsKey(event.connection)) return@Runnable
+                setConnectionJoinResult(event.connection, LoginResult.TIMEOUT)
+                event.connection.audience.closeDialog()
+                _awaitingResponse.remove(event.connection)
+            },
+            secToTicks(cfg().dialog.timeout),
+        )
 
         _awaitingResponse[event.connection] = response
         event.connection.audience.showDialog(dialog)
@@ -78,15 +86,20 @@ class DialogListener(plugin: Cardea) : Listener {
         setConnectionJoinResult(event.commonConnection, LoginResult.CORRECT)
     }
 
-    fun setConnectionJoinResult(connection: PlayerCommonConnection, value: LoginResult) {
+    fun setConnectionJoinResult(
+        connection: PlayerCommonConnection,
+        value: LoginResult,
+    ) {
         val future = _awaitingResponse[connection] ?: return
         future.complete(value)
     }
 }
 
-enum class LoginResult(val msg: Component) {
+enum class LoginResult(
+    val msg: Component,
+) {
     CORRECT(mm(cfg().dialog.loginResult.success)),
     INCORRECT(mm(cfg().dialog.loginResult.incorrect)),
     CANCELLED(mm(cfg().dialog.loginResult.cancelled)),
-    TIMEOUT(mm(cfg().dialog.loginResult.timeout));
+    TIMEOUT(mm(cfg().dialog.loginResult.timeout)),
 }

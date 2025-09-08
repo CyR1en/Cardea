@@ -9,24 +9,24 @@ import org.bukkit.command.ConsoleCommandSender
 
 @Suppress("UnstableApiUsage")
 class CommandsBootstrapper(context: BootstrapContext) {
-    private val _ctx = context
-    private var _arguments = mutableListOf<CardeaCommand>()
-    private val _root: LiteralArgumentBuilder<CommandSourceStack> = Commands.literal("cardea")
+  private val _ctx = context
+  private var _arguments = mutableListOf<CardeaCommand>()
+  private val _root: LiteralArgumentBuilder<CommandSourceStack> = Commands.literal("cardea")
 
-    init {
-        _root.requires { it.sender is ConsoleCommandSender }
-        _arguments.add(Password())
-        _arguments.add(ShowPassword())
-        _arguments.add(Invalidate())
-        _arguments.add(Reload())
+  init {
+    _root.requires { it.sender is ConsoleCommandSender }
+    _arguments.add(Password())
+    _arguments.add(ShowPassword())
+    _arguments.add(Invalidate())
+    _arguments.add(Reload())
+  }
+
+  fun bootstrap() {
+    _arguments.forEach { _root.then(it.final()) }
+    val rootCmd = _root.build()
+
+    _ctx.lifecycleManager.registerEventHandler(LifecycleEvents.COMMANDS) {
+      it.registrar().register(rootCmd)
     }
-
-    fun bootstrap() {
-        _arguments.forEach { _root.then(it.final()) }
-        val rootCmd = _root.build()
-
-        _ctx.lifecycleManager.registerEventHandler(LifecycleEvents.COMMANDS) {
-            it.registrar().register(rootCmd)
-        }
-    }
+  }
 }

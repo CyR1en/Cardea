@@ -13,30 +13,33 @@ import io.papermc.paper.registry.data.dialog.body.DialogBody
 import io.papermc.paper.registry.data.dialog.input.DialogInput
 import io.papermc.paper.registry.data.dialog.type.DialogType
 
-
 @Suppress("UnstableApiUsage")
 open class DialogHolder(
     val key: TypedKey<Dialog>,
     val base: DialogBase,
-    val type: DialogType
+    val type: DialogType,
 )
 
 @Suppress("UnstableApiUsage")
-class LoginDialogHolder() : DialogHolder(
-    dialogKey("cardea:login"),
-    DialogBase.builder(mm(cfg().dialog.title))
-        .canCloseWithEscape(false)
-        .body(cfg().dialog.body.map { b -> DialogBody.plainMessage(mm(b)) })
-        .inputs(listOf(DialogInput.text("password", mm(cfg().dialog.inputPrompt)).build()))
-        .build(),
-    DialogType.confirmation(
-        ActionButton.builder(mm(cfg().dialog.buttons.submitLabel))
-            .tooltip(mm(cfg().dialog.buttons.submitHover))
-            .action(DialogAction.customClick(getKey("cardea:login/submit"), null))
+class LoginDialogHolder :
+    DialogHolder(
+        dialogKey("cardea:login"),
+        DialogBase
+            .builder(mm(cfg().dialog.title))
+            .canCloseWithEscape(false)
+            .body(cfg().dialog.body.map { b -> DialogBody.plainMessage(mm(b)) })
+            .inputs(listOf(DialogInput.text("password", mm(cfg().dialog.inputPrompt)).build()))
             .build(),
-        ActionButton.builder(mm(cfg().dialog.buttons.cancelLabel))
-            .tooltip(mm(cfg().dialog.buttons.cancelHover))
-            .action(DialogAction.customClick(getKey("cardea:login/cancel"), null))
-            .build()
+        DialogType.confirmation(
+            ActionButton
+                .builder(mm(cfg().dialog.buttons.submitLabel))
+                .tooltip(mm(cfg().dialog.buttons.submitHover))
+                .action(DialogAction.customClick(getKey("cardea:login/submit"), null))
+                .build(),
+            ActionButton
+                .builder(mm(cfg().dialog.buttons.cancelLabel))
+                .tooltip(mm(cfg().dialog.buttons.cancelHover))
+                .action(DialogAction.customClick(getKey("cardea:login/cancel"), null))
+                .build(),
+        ),
     )
-)
